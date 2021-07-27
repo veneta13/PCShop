@@ -5,6 +5,7 @@
 #include "property.hpp"
 
 class Component {
+    protected:
     std::vector<Property> properties = {};
     double price = 0.0;
 
