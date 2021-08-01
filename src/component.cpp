@@ -1,4 +1,11 @@
 #include "../inc/component.hpp"
+    Component::~Component(){
+
+    }
+    
+    std::string Component::tellType() const{
+        return "Base component";
+    }
 
     void Component::calculatePrice(){
         double tempPrice = 0.0;

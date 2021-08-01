@@ -12,6 +12,8 @@ class Component {
     void calculatePrice();
 
     public:
+    virtual ~Component();
+    virtual std::string tellType() const;
     void addProperty(Property property);
     void removeProperty(Property property);
     int getPropertyQuantity(std::string propertyName) const;

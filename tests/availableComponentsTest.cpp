@@ -17,6 +17,7 @@ TEST_CASE("Inheritance")
         myCPU.addProperty(frequency);
 
         REQUIRE(floor(myCPU.getPrice()) == 745);
+        REQUIRE(myCPU.tellType() == "CPU");
     }
 
     SECTION("RAM")
@@ -26,12 +27,13 @@ TEST_CASE("Inheritance")
         Property rgb("colors", 10, 5);
 
 
-        Cpu myCPU;
-        myCPU.addProperty(gigabytes);
-        myCPU.addProperty(chips);
-        myCPU.addProperty(rgb);
+        Ram myRAM;
+        myRAM.addProperty(gigabytes);
+        myRAM.addProperty(chips);
+        myRAM.addProperty(rgb);
 
-        REQUIRE(floor(myCPU.getPrice()) == 360);
+        REQUIRE(floor(myRAM.getPrice()) == 360);
+        REQUIRE(myRAM.tellType() == "RAM");
     }
 
     SECTION("HDD")
@@ -41,11 +43,12 @@ TEST_CASE("Inheritance")
         Property writingSpeed("writing speed", 140, 0.6);
 
 
-        Cpu myCPU;
-        myCPU.addProperty(terabytes);
-        myCPU.addProperty(readingSpeed);
-        myCPU.addProperty(writingSpeed);
+        Hdd myHDD;
+        myHDD.addProperty(terabytes);
+        myHDD.addProperty(readingSpeed);
+        myHDD.addProperty(writingSpeed);
 
-        REQUIRE(floor(myCPU.getPrice()) == 459);
+        REQUIRE(floor(myHDD.getPrice()) == 459);
+        REQUIRE(myHDD.tellType() == "HDD");
     }
 }
