@@ -3,6 +3,21 @@
 
     }
     
+    bool operator==(const Component c1, const Component c2){
+        bool found = false;
+        for (int i = 0; i < c1.properties.size(); i++)
+        {
+            Property c1Property = c1.properties[i];
+            for (int j = 0; j < c2.properties.size(); j++)
+            {
+                Property c2Property = c2.properties[j];
+                if (c1Property == c2Property) {found = true;}
+            }
+            if (!found) return false;
+        }
+        return true;
+    }
+
     std::string Component::tellType() const{
         return "Base component";
     }

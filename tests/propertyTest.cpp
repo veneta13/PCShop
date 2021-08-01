@@ -30,3 +30,62 @@ TEST_CASE("Constructor")
         REQUIRE(property.getPrice() == price);
     }
 }
+
+TEST_CASE("OPERATOR ==")
+{
+    SECTION("NOT EQUAL - 3 differences")
+    {
+        Property property1("name1", 2, 3.4);
+        Property property2("name2", 3, 4.5);
+
+        REQUIRE(!(property1 == property2));
+    }
+
+    SECTION("NOT EQUAL - 2 differences")
+    {
+        Property property1("name1", 2, 3.4);
+        Property property2("name2", 3, 3.4);
+
+        REQUIRE(!(property1 == property2));
+    }
+
+    SECTION("NOT EQUAL - 2 differences")
+    {
+        Property property1("name1", 2, 3.4);
+        Property property2("name1", 3, 6.8);
+
+        REQUIRE(!(property1 == property2));
+    }
+
+    SECTION("NOT EQUAL - 1 difference - name")
+    {
+        Property property1("name1", 2, 6.8);
+        Property property2("name2", 2, 6.8);
+
+        REQUIRE(!(property1 == property2));
+    }
+
+    SECTION("NOT EQUAL - 1 difference - quantity")
+    {
+        Property property1("name1", 2, 3.4);
+        Property property2("name1", 6, 3.4);
+
+        REQUIRE(!(property1 == property2));
+    }
+
+    SECTION("NOT EQUAL - 1 difference - price")
+    {
+        Property property1("name1", 2, 3.4);
+        Property property2("name1", 2, 6.8);
+
+        REQUIRE(!(property1 == property2));
+    }
+
+    SECTION("EQUAL")
+    {
+        Property property1("name1", 2, 3.1415);
+        Property property2("name1", 2, 3.1415);
+
+    REQUIRE(property1 == property2);
+    }
+}
