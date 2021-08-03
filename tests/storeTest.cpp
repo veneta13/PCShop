@@ -2,6 +2,7 @@
 #include "catch2.h"
 #include "../inc/property.hpp"
 #include "../inc/component.hpp"
+#include "../inc/componentKeeper.hpp"
 #include "../inc/store.hpp"
 
 TEST_CASE("Components")

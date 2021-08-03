@@ -2,15 +2,13 @@
 #define STORE
 
 #include "libraries.hpp"
-#include "property.hpp"
-#include "availableComponents.hpp"
+#include "componentKeeper.hpp"
 
 class Store {
     //Singleton
     Store();
     Store(Store const&);
-
-    std::vector<Component> components = {};
+    ComponentKeeper components;
 
     public:
     Store(Store &other) = delete;
