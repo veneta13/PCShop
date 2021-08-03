@@ -13,22 +13,22 @@ TEST_CASE("Components")
     Property property5("name 5", 8, 14.2);
     Property property6("name 6", 15, 3.8);
 
-    Component component1;
-    Component component2;
-    Component component3;
-    Component component4;
+    std::shared_ptr<Component> component1(new Component());
+    std::shared_ptr<Component> component2(new Component());
+    std::shared_ptr<Component> component3(new Component());
+    std::shared_ptr<Component> component4(new Component());
 
-    component1.addProperty(property1);
-    component1.addProperty(property2);
+    component1->addProperty(property1);
+    component1->addProperty(property2);
 
-    component2.addProperty(property5);
-    component2.addProperty(property2);
-    component2.addProperty(property1);
+    component2->addProperty(property5);
+    component2->addProperty(property2);
+    component2->addProperty(property1);
 
-    component3.addProperty(property4);
+    component3->addProperty(property4);
 
-    component4.addProperty(property5);
-    component4.addProperty(property6);
+    component4->addProperty(property5);
+    component4->addProperty(property6);
 
     SECTION("Insert")
     {

@@ -16,9 +16,9 @@ class Store {
     static Store& getInstance();
 
     int count() const;
-    void insertComponent(Component component);
-    void removeComponent(Component component);
-    int findComponent(Component component);
+    void insertComponent(std::shared_ptr<Component> component);
+    void removeComponent(std::shared_ptr<Component> component);
+    int findComponent(std::shared_ptr<Component> component);
 };
 
 #endif

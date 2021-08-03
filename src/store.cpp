@@ -12,14 +12,14 @@ int Store::count() const{
     return components.count();
 }
 
-void Store::insertComponent(Component component){
+void Store::insertComponent(std::shared_ptr<Component> component){
     components.insertComponent(component);
 }
 
-void Store::removeComponent(Component component){
+void Store::removeComponent(std::shared_ptr<Component> component){
     components.removeComponent(component);
 }
 
-int Store::findComponent(Component component){
+int Store::findComponent(std::shared_ptr<Component> component){
     return components.findComponent(component);
 }

@@ -13,28 +13,28 @@ TEST_CASE("Update")
     SECTION("Updated quantity")
     {
         Property property(name[0], quantity[0], price[0]);
-        Component component;
-        component.addProperty(property);
+        std::shared_ptr<Component> component(new Component());
+        component->addProperty(property);
 
-        REQUIRE(component.getPropertyQuantity(name[0]) == quantity[0]);
+        REQUIRE(component->getPropertyQuantity(name[0]) == quantity[0]);
 
         Property updatedProperty(name[0], quantity[1], price[0]);
-        component.addProperty(updatedProperty);
+        component->addProperty(updatedProperty);
 
-        REQUIRE(component.getPropertyQuantity(name[0]) == quantity[1]);
+        REQUIRE(component->getPropertyQuantity(name[0]) == quantity[1]);
     }
 
     SECTION("Updated price")
     {
         Property property(name[0], quantity[0], price[0]);
-        Component component;
-        component.addProperty(property);
+        std::shared_ptr<Component> component(new Component());
+        component->addProperty(property);
 
-        REQUIRE(ceil(component.getPrice()) == 11);
+        REQUIRE(ceil(component->getPrice()) == 11);
 
         Property updatedProperty(name[0], quantity[0], price[2]);
-        component.addProperty(updatedProperty);
-        REQUIRE(ceil(component.getPrice()) == 31);
+        component->addProperty(updatedProperty);
+        REQUIRE(ceil(component->getPrice()) == 31);
     }
 }
 
@@ -44,26 +44,26 @@ TEST_CASE("Remove")
     {
         Property removedProperty(name[1], quantity[1], price[1]);
 
-        Component component;
-        component.addProperty(removedProperty);
-        REQUIRE(component.getPropertyQuantity(name[1]) == quantity[1]);
+        std::shared_ptr<Component> component(new Component());
+        component->addProperty(removedProperty);
+        REQUIRE(component->getPropertyQuantity(name[1]) == quantity[1]);
 
-        component.removeProperty(removedProperty);
-        REQUIRE(component.getPropertyQuantity(name[1]) == -1);
+        component->removeProperty(removedProperty);
+        REQUIRE(component->getPropertyQuantity(name[1]) == -1);
     }
 
     SECTION("Remove property price check")
     {
         Property removedProperty(name[1], quantity[1], price[1]);
 
-        Component component;
-        component.addProperty(removedProperty);
-        REQUIRE(floor(component.getPrice()) == 40);
-        REQUIRE(ceil(component.getPrice()) == 41);
+        std::shared_ptr<Component> component(new Component());
+        component->addProperty(removedProperty);
+        REQUIRE(floor(component->getPrice()) == 40);
+        REQUIRE(ceil(component->getPrice()) == 41);
 
-        component.removeProperty(removedProperty);
+        component->removeProperty(removedProperty);
 
-        REQUIRE(floor(component.getPrice()) == 0);
+        REQUIRE(floor(component->getPrice()) == 0);
     }
 }
 
@@ -72,23 +72,23 @@ TEST_CASE("OPERATOR ==")
     SECTION("EQUAL - no properties")
     {
 
-        Component component1;
-        Component component2;
+        std::shared_ptr<Component> component1(new Component());
+        std::shared_ptr<Component> component2(new Component());
 
-        REQUIRE(component1 == component2);
+        REQUIRE(*component1 == *component2);
     }
 
     SECTION("EQUAL - 1 property")
     {
         Property property(name[1], quantity[1], price[1]);
 
-        Component component1;
-        component1.addProperty(property);
+        std::shared_ptr<Component> component1(new Component());
+        component1->addProperty(property);
 
-        Component component2;
-        component2.addProperty(property);
+        std::shared_ptr<Component> component2(new Component());
+        component2->addProperty(property);
 
-        REQUIRE(component1 == component2);
+        REQUIRE(*component1 == *component2);
     }
 
     SECTION("EQUAL - 2 properties")
@@ -96,15 +96,15 @@ TEST_CASE("OPERATOR ==")
         Property property1(name[1], quantity[1], price[1]);
         Property property2(name[2], quantity[2], price[2]);
 
-        Component component1;
-        component1.addProperty(property1);
-        component1.addProperty(property2);
+        std::shared_ptr<Component> component1(new Component());
+        component1->addProperty(property1);
+        component1->addProperty(property2);
 
-        Component component2;
-        component2.addProperty(property1);
-        component2.addProperty(property2);
+        std::shared_ptr<Component> component2(new Component());
+        component2->addProperty(property1);
+        component2->addProperty(property2);
 
-        REQUIRE(component1 == component2);
+        REQUIRE(*component1 == *component2);
     }
 
     SECTION("EQUAL - 3 properties")
@@ -113,17 +113,17 @@ TEST_CASE("OPERATOR ==")
         Property property2(name[2], quantity[2], price[2]);
         Property property3(name[3], quantity[3], price[3]);
 
-        Component component1;
-        component1.addProperty(property1);
-        component1.addProperty(property2);
-        component1.addProperty(property3);
+        std::shared_ptr<Component> component1(new Component());
+        component1->addProperty(property1);
+        component1->addProperty(property2);
+        component1->addProperty(property3);
 
-        Component component2;
-        component2.addProperty(property1);
-        component2.addProperty(property2);
-        component2.addProperty(property3);
+        std::shared_ptr<Component> component2(new Component());
+        component2->addProperty(property1);
+        component2->addProperty(property2);
+        component2->addProperty(property3);
 
-        REQUIRE(component1 == component2);
+        REQUIRE(*component1 == *component2);
     }
     
     SECTION("NOT EQUAL - 1 property")
@@ -131,13 +131,13 @@ TEST_CASE("OPERATOR ==")
         Property property1(name[1], quantity[1], price[1]);
         Property property2(name[2], quantity[2], price[2]);
 
-        Component component1;
-        component1.addProperty(property1);
+        std::shared_ptr<Component> component1(new Component());
+        component1->addProperty(property1);
 
-        Component component2;
-        component2.addProperty(property2);
+        std::shared_ptr<Component> component2(new Component());
+        component2->addProperty(property2);
 
-        REQUIRE(!(component1 == component2));
+        REQUIRE(!(*component1 == *component2));
     }
 
     SECTION("NOT EQUAL - 1 property matching and 1 not")
@@ -146,15 +146,15 @@ TEST_CASE("OPERATOR ==")
         Property property2(name[2], quantity[2], price[2]);
         Property property3(name[0], quantity[0], price[0]);
 
-        Component component1;
-        component1.addProperty(property1);
-        component1.addProperty(property2);
+        std::shared_ptr<Component> component1(new Component());
+        component1->addProperty(property1);
+        component1->addProperty(property2);
 
-        Component component2;
-        component2.addProperty(property2);
-        component2.addProperty(property3);
+        std::shared_ptr<Component> component2(new Component());
+        component2->addProperty(property2);
+        component2->addProperty(property3);
 
-        REQUIRE(!(component1 == component2));
+        REQUIRE(!(*component1 == *component2));
     }
 
     SECTION("NOT EQUAL - 2 properties not matching")
@@ -164,15 +164,15 @@ TEST_CASE("OPERATOR ==")
         Property property2(name[2], quantity[2], price[2]);
         Property property3(name[3], quantity[3], price[3]);
 
-        Component component1;
-        component1.addProperty(property0);
-        component1.addProperty(property1);
+        std::shared_ptr<Component> component1(new Component());
+        component1->addProperty(property0);
+        component1->addProperty(property1);
 
-        Component component2;
-        component2.addProperty(property2);
-        component2.addProperty(property3);
+        std::shared_ptr<Component> component2(new Component());
+        component2->addProperty(property2);
+        component2->addProperty(property3);
 
-        REQUIRE(!(component1 == component2));
+        REQUIRE(!(*component1 == *component2));
     }
 
     SECTION("NOT EQUAL - different operator count")
@@ -181,15 +181,15 @@ TEST_CASE("OPERATOR ==")
         Property property2(name[2], quantity[2], price[2]);
         Property property3(name[3], quantity[3], price[3]);
 
-        Component component1;
-        component1.addProperty(property1);
-        component1.addProperty(property2);
-        component1.addProperty(property3);
+        std::shared_ptr<Component> component1(new Component());
+        component1->addProperty(property1);
+        component1->addProperty(property2);
+        component1->addProperty(property3);
 
-        Component component2;
-        component2.addProperty(property1);
-        component2.addProperty(property2);
+        std::shared_ptr<Component> component2(new Component());
+        component2->addProperty(property1);
+        component2->addProperty(property2);
 
-        REQUIRE(!(component1 == component2));
+        REQUIRE(!(*component1 == *component2));
     }
 }
