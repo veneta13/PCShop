@@ -174,4 +174,22 @@ TEST_CASE("OPERATOR ==")
 
         REQUIRE(!(component1 == component2));
     }
+
+    SECTION("NOT EQUAL - different operator count")
+    {
+        Property property1(name[1], quantity[1], price[1]);
+        Property property2(name[2], quantity[2], price[2]);
+        Property property3(name[3], quantity[3], price[3]);
+
+        Component component1;
+        component1.addProperty(property1);
+        component1.addProperty(property2);
+        component1.addProperty(property3);
+
+        Component component2;
+        component2.addProperty(property1);
+        component2.addProperty(property2);
+
+        REQUIRE(!(component1 == component2));
+    }
 }
