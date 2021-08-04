@@ -1,9 +1,14 @@
+//define EPSILON for double comparison
+#define EPSILON 0.000001
+
 #include "catch2.h"
 #include "../inc/property.hpp"
 #include "../inc/component.hpp"
 #include "../inc/componentKeeper.hpp"
 #include "../inc/availableComponents.hpp"
 #include "../inc/configuration.hpp"
+
+#include <cmath>
 
 TEST_CASE("Configuration")
 {
@@ -87,5 +92,29 @@ TEST_CASE("Configuration")
 
         REQUIRE(dummyConfiguration.count() == 2);
         REQUIRE(dummyConfiguration.getComponent(*myCpu2) == nullptr);
+    }
+
+    SECTION ("PRICE")
+    {
+        Configuration dummyConfiguration;
+        REQUIRE(dummyConfiguration.price() < EPSILON);
+
+        dummyConfiguration.insertComponent(component1);
+        REQUIRE(abs(dummyConfiguration.price() - 32.314) < EPSILON); 
+        
+        dummyConfiguration.insertComponent(component2);
+        REQUIRE(abs(dummyConfiguration.price() - 186.18) < EPSILON);
+
+        dummyConfiguration.insertComponent(component3);
+        REQUIRE(abs(dummyConfiguration.price() - 220.527) < EPSILON);
+
+        dummyConfiguration.removeComponent(component1);
+        REQUIRE(abs(dummyConfiguration.price() - 188.213) < EPSILON);
+
+        dummyConfiguration.removeComponent(component3);
+        REQUIRE(abs(dummyConfiguration.price() - 153.866) < EPSILON);
+
+        dummyConfiguration.removeComponent(component2);
+        REQUIRE(dummyConfiguration.price() < EPSILON);
     }
 }
