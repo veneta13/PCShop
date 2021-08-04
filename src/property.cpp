@@ -17,6 +17,13 @@
         else {return false;}
     }
 
+    bool operator>(const Property p1, const Property p2)
+    {
+        if (p1.name == p2.name 
+        &&  p1.quantity > p2.quantity) {return true;}
+        else {return false;}
+    }
+
     std::string Property::getName() const{
         return name;
     }

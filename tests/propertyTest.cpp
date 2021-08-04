@@ -86,6 +86,49 @@ TEST_CASE("OPERATOR ==")
         Property property1("name1", 2, 3.1415);
         Property property2("name1", 2, 3.1415);
 
-    REQUIRE(property1 == property2);
+        REQUIRE(property1 == property2);
+    }
+}
+
+TEST_CASE("OPERATOR >")
+{
+    SECTION("FALSE - different name")
+    {
+        Property property1("name1", 2, 3.4);
+        Property property2("name2", 3, 4.5);
+
+        REQUIRE(!(property1 > property2));
+    }
+
+    SECTION("FALSE - different name, equal value")
+    {
+        Property property1("name1", 3, 3.4);
+        Property property2("name1", 3, 3.4);
+
+        REQUIRE(!(property1 > property2));
+    }
+
+    SECTION("FALSE - p1 < p2")
+    {
+        Property property1("name1", 2, 6.8);
+        Property property2("name1", 3, 6.8);
+
+        REQUIRE(!(property1 > property2));
+    }
+
+    SECTION("FALSE - p1 == p2")
+    {
+        Property property1("name1", 2, 3.4);
+        Property property2("name1", 6, 3.4);
+
+        REQUIRE(!(property1 > property2));
+    }
+
+    SECTION("TRUE - p1 > p2")
+    {
+        Property property1("name1", 5, 3.1415);
+        Property property2("name1", 2, 3.1415);
+
+        REQUIRE(property1 > property2);
     }
 }
