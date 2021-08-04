@@ -157,6 +157,23 @@ TEST_CASE("OPERATOR ==")
         REQUIRE(!(*component1 == *component2));
     }
 
+    SECTION("NOT EQUAL - 1 property matching and 1 not - different order")
+    {
+        Property property1(name[1], quantity[1], price[1]);
+        Property property2(name[2], quantity[2], price[2]);
+        Property property3(name[0], quantity[0], price[0]);
+
+        std::shared_ptr<Component> component1(new Component());
+        component1->addProperty(property1);
+        component1->addProperty(property2);
+
+        std::shared_ptr<Component> component2(new Component());
+        component2->addProperty(property3);
+        component2->addProperty(property1);
+
+        REQUIRE(!(*component1 == *component2));
+    }
+
     SECTION("NOT EQUAL - 2 properties not matching")
     {
         Property property0(name[0], quantity[0], price[0]);

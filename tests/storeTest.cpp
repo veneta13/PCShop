@@ -49,11 +49,11 @@ TEST_CASE("Components")
     {
         Store& store = Store::getInstance();
         store.removeComponent(component2);
-        REQUIRE(store.findComponent(component2) == -1);
+        REQUIRE(store.findComponent(*component2) == -1);
         store.removeComponent(component1);
-        REQUIRE(store.findComponent(component1) == 0);
+        REQUIRE(store.findComponent(*component1) == 0);
         store.removeComponent(component1);
-        REQUIRE(store.findComponent(component1) == -1);
+        REQUIRE(store.findComponent(*component1) == -1);
     }
 
     SECTION("FIND")
@@ -64,9 +64,9 @@ TEST_CASE("Components")
         store.insertComponent(component4);
 
         REQUIRE(store.count() == 3);
-        REQUIRE(store.findComponent(component1) == -1);
-        REQUIRE(store.findComponent(component2) == 0);
-        REQUIRE(store.findComponent(component3) == 1);
-        REQUIRE(store.findComponent(component4) == 2);
+        REQUIRE(store.findComponent(*component1) == -1);
+        REQUIRE(store.findComponent(*component2) == 0);
+        REQUIRE(store.findComponent(*component3) == 1);
+        REQUIRE(store.findComponent(*component4) == 2);
     }
 }

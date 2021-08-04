@@ -15,7 +15,8 @@
                 Property c2Property = c2.properties[j];
                 if (c1Property == c2Property) {found = true;}
             }
-            if (!found) return false;
+            if (!found) {return false;}
+            found = false;
         }
         return true;
     }

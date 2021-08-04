@@ -20,6 +20,6 @@ void Store::removeComponent(std::shared_ptr<Component> component){
     components.removeComponent(component);
 }
 
-int Store::findComponent(std::shared_ptr<Component> component){
+int Store::findComponent(Component component){
     return components.findComponent(component);
 }
