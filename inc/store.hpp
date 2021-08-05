@@ -10,7 +10,7 @@ class Store {
     Store(Store const&);
     ComponentKeeper components;
 
-    public:
+    private: //for unit testing
     Store(Store &other) = delete;
     void operator=(const Store&) = delete;
     static Store& getInstance();
@@ -19,6 +19,9 @@ class Store {
     void insertComponent(std::shared_ptr<Component> component);
     void removeComponent(std::shared_ptr<Component> component);
     int findComponent(Component component);
+    std::shared_ptr<Component> getComponentById(int index);
+
+    friend class Configurator;
 };
 
 #endif

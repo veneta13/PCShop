@@ -23,3 +23,11 @@ void Store::removeComponent(std::shared_ptr<Component> component){
 int Store::findComponent(Component component){
     return components.findComponent(component);
 }
+
+std::shared_ptr<Component> Store::getComponentById(int index)
+{
+    if (index >= 0 && index < components.count()) {
+        return components.component(index);
+    }
+    else return nullptr;
+}

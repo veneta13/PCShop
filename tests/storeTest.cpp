@@ -3,6 +3,7 @@
 #include "../inc/property.hpp"
 #include "../inc/component.hpp"
 #include "../inc/componentKeeper.hpp"
+#define private public //to access private methods
 #include "../inc/store.hpp"
 
 TEST_CASE("Components")
@@ -68,5 +69,17 @@ TEST_CASE("Components")
         REQUIRE(store.findComponent(*component2) == 0);
         REQUIRE(store.findComponent(*component3) == 1);
         REQUIRE(store.findComponent(*component4) == 2);
+    }
+
+    SECTION("GET BY ID")
+    {
+        Store& store = Store::getInstance();
+
+        REQUIRE(store.count() == 3);
+        REQUIRE(store.getComponentById(-1) == nullptr);
+        REQUIRE(*(store.getComponentById(0)) == *component2);
+        REQUIRE(*(store.getComponentById(1)) == *component3);
+        REQUIRE(*(store.getComponentById(2)) == *component4);
+        REQUIRE(store.getComponentById(3) == nullptr);
     }
 }
