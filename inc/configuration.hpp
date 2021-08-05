@@ -16,6 +16,7 @@ class Configuration {
     void insertComponent(std::shared_ptr<Component> component);
     void removeComponent(std::shared_ptr<Component> component);
     std::shared_ptr<Component> getComponent(Component component);
+    std::shared_ptr<Component> getComponentById(int index);
     double price();
 
     friend class Configurator;

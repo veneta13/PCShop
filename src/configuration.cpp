@@ -37,6 +37,14 @@ std::shared_ptr<Component> Configuration::getComponent(Component component){
     return components.component(index);
 }
 
+std::shared_ptr<Component> Configuration::getComponentById(int index)
+{
+    if (index >= 0 && index < components.count()) {
+        return components.component(index);
+    }
+    else return nullptr;
+}
+
 double Configuration::price(){
     return (innerPrice * 1.07);
 }

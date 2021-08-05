@@ -114,4 +114,18 @@ TEST_CASE("Configuration")
         dummyConfiguration.removeComponent(component2);
         REQUIRE(dummyConfiguration.price() < EPSILON);
     }
+
+    SECTION("GET COMPONENT BY ID")
+    {
+        Configuration dummyConfiguration;
+        dummyConfiguration.insertComponent(component1);
+        dummyConfiguration.insertComponent(component2);
+        dummyConfiguration.insertComponent(component3);
+
+        REQUIRE(dummyConfiguration.getComponentById(-1) == nullptr);
+        REQUIRE(*dummyConfiguration.getComponentById(0) == *component1);
+        REQUIRE(*dummyConfiguration.getComponentById(1) == *component2);
+        REQUIRE(*dummyConfiguration.getComponentById(2) == *component3);
+        REQUIRE(dummyConfiguration.getComponentById(3) == nullptr);
+    }
 }
