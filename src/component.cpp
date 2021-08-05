@@ -1,10 +1,30 @@
 #include "../inc/component.hpp"
-    Component::~Component(){
+    Component::~Component(){}
 
-    }
-    
     bool operator==(const Component c1, const Component c2){
         if (c1.properties.size() != c2.properties.size()){return false;}
+        bool found = false;
+        for (int i = 0; i < c1.properties.size(); i++)
+        {
+            Property c1Property = c1.properties[i];
+            for (int j = 0; j < c2.properties.size(); j++)
+            {
+                Property c2Property = c2.properties[j];
+                if (c1Property == c2Property) {found = true;}
+            }
+            if (!found) {return false;}
+            found = false;
+        }
+        return true;
+    }
+
+    bool operator>=(const Component c1, const Component c2){
+        if (c1.properties.size() == 0 || c2.properties.size() == 0){return false;}
+
+        if (c1.properties.size() != c2.properties.size()){
+            throw std::runtime_error("Error: Cannot compare components.");
+        }
+        
         bool found = false;
 
         for (int i = 0; i < c1.properties.size(); i++)
@@ -13,7 +33,7 @@
             for (int j = 0; j < c2.properties.size(); j++)
             {
                 Property c2Property = c2.properties[j];
-                if (c1Property == c2Property) {found = true;}
+                if (c1Property > c2Property || c1Property == c2Property) {found = true;}
             }
             if (!found) {return false;}
             found = false;

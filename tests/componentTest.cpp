@@ -3,8 +3,7 @@
 #include "../inc/property.hpp"
 #include "../inc/component.hpp"
 
-
-const std::string name[] = {"MyComponentName1", "MyComponentName2", "MyComponentName3"};
+const std::string name[] = {"MyComponentName1", "MyComponentName2", "MyComponentName3", "MyComponentName4"};
 const int quantity[] = {1, 2, 3, 4};
 const double price[] = {10.10, 20.20, 30.30, 40.40};
 
@@ -208,5 +207,188 @@ TEST_CASE("OPERATOR ==")
         component2->addProperty(property2);
 
         REQUIRE(!(*component1 == *component2));
+    }
+
+}
+
+TEST_CASE("OPERATOR >=")
+{
+    // ---  using separate variable to fix some Catch2 bug ----
+    bool result;
+
+    SECTION ("Empty components")
+    {
+        std::shared_ptr<Component> component1(new Component());
+        std::shared_ptr<Component> component2(new Component());
+
+        if (*component1 >= *component2) {result = true;}
+        else { result = false;}
+        REQUIRE(result == false);
+
+        if (*component2 >= *component1) {result = true;}
+        else { result = false;}
+        REQUIRE(result == false);
+    }
+
+    SECTION ("1 property with the same name || same quantity")
+    {
+        Property property1(name[0], quantity[1], price[0]);
+        Property property2(name[0], quantity[1], price[0]);
+
+        std::shared_ptr<Component> component1(new Component());
+        std::shared_ptr<Component> component2(new Component());
+        component1->addProperty(property1);
+        component2->addProperty(property2); 
+
+        if (*component1 >= *component2) {result = true;}
+        else { result = false;}
+        REQUIRE(result == true);
+
+        if (*component2 >= *component1) {result = true;}
+        else { result = false;}
+        REQUIRE(result == true);
+    }
+
+    SECTION ("1 property with the same name")
+    {
+        Property property1(name[0], quantity[0], price[0]);
+        Property property2(name[0], quantity[1], price[0]);
+
+        std::shared_ptr<Component> component1(new Component());
+        std::shared_ptr<Component> component2(new Component());
+        component1->addProperty(property1);
+        component2->addProperty(property2); 
+
+        if (*component1 >= *component2) {result = true;}
+        else { result = false;}
+        REQUIRE(result == false);
+
+        if (*component2 >= *component1) {result = true;}
+        else { result = false;}
+        REQUIRE(result == true);
+    }
+
+    SECTION ("1 property with the different name || same quantity")
+    {
+        Property property1(name[0], quantity[1], price[0]);
+        Property property2(name[1], quantity[1], price[0]);
+
+        std::shared_ptr<Component> component1(new Component());
+        std::shared_ptr<Component> component2(new Component());
+        component1->addProperty(property1);
+        component2->addProperty(property2); 
+
+        if (*component1 >= *component2) {result = true;}
+        else { result = false;}
+        REQUIRE(result == false);
+
+        if (*component2 >= *component1) {result = true;}
+        else { result = false;}
+        REQUIRE(result == false);
+    }
+
+    SECTION ("1 property with the different name")
+    {
+        Property property1(name[0], quantity[1], price[0]);
+        Property property2(name[1], quantity[2], price[0]);
+
+        std::shared_ptr<Component> component1(new Component());
+        std::shared_ptr<Component> component2(new Component());
+        component1->addProperty(property1);
+        component2->addProperty(property2); 
+
+        if (*component1 >= *component2) {result = true;}
+        else { result = false;}
+        REQUIRE(result == false);
+
+        if (*component1 >= *component1) {result = true;}
+        else { result = false;}
+        REQUIRE(result == true);
+
+        if (*component2 >= *component1) {result = true;}
+        else { result = false;}
+        REQUIRE(result == false);
+    }
+
+    SECTION ("2 property with the same name")
+    {
+        Property property1(name[0], quantity[0], price[0]);
+        Property property2(name[1], quantity[1], price[0]);
+        Property property3(name[0], quantity[3], price[0]);
+        Property property4(name[1], quantity[1], price[0]);
+
+        std::shared_ptr<Component> component1(new Component());
+        std::shared_ptr<Component> component2(new Component());
+        component1->addProperty(property1);
+        component1->addProperty(property2); 
+        component2->addProperty(property3);
+        component2->addProperty(property4); 
+
+        if (*component1 >= *component2) {result = true;}
+        else { result = false;}
+        REQUIRE(result == false);
+
+        if (*component1 >= *component1) {result = true;}
+        else { result = false;}
+        REQUIRE(result == true);
+
+        if (*component2 >= *component1) {result = true;}
+        else { result = false;}
+        REQUIRE(result == true);
+    }
+
+    SECTION ("2 properties - not matching")
+    {
+        Property property1(name[0], quantity[1], price[0]);
+        Property property2(name[1], quantity[1], price[0]);
+        Property property3(name[2], quantity[2], price[0]);
+        Property property4(name[1], quantity[2], price[0]);
+
+        std::shared_ptr<Component> component1(new Component());
+        std::shared_ptr<Component> component2(new Component());
+        component1->addProperty(property1);
+        component1->addProperty(property2); 
+        component2->addProperty(property3);
+        component2->addProperty(property4); 
+
+        if (*component1 >= *component2) {result = true;}
+        else { result = false;}
+        REQUIRE(result == false);
+
+        if (*component2 >= *component1) {result = true;}
+        else { result = false;}
+        REQUIRE(result == false);
+    }
+
+    SECTION ("2 properties - not matching")
+    {
+        Property property1(name[0], quantity[1], price[0]);
+        Property property2(name[1], quantity[1], price[0]);
+        Property property3(name[1], quantity[2], price[0]);
+        Property property4(name[1], quantity[2], price[0]);
+
+        std::shared_ptr<Component> component1(new Component());
+        std::shared_ptr<Component> component2(new Component());
+        component1->addProperty(property1);
+        component1->addProperty(property2); 
+        component2->addProperty(property3);
+        component2->addProperty(property4); 
+
+       REQUIRE_THROWS_AS(*component1 >= *component2, std::runtime_error);
+    }
+
+    SECTION ("Different property count")
+    {
+        Property property1(name[0], quantity[1], price[0]);
+        Property property2(name[1], quantity[2], price[0]);
+
+        std::shared_ptr<Component> component1(new Component());
+        std::shared_ptr<Component> component2(new Component());
+        component1->addProperty(property1);
+        component2->addProperty(property2); 
+        component2->addProperty(property1); 
+
+        REQUIRE_THROWS_AS(*component1 >= *component2, std::runtime_error);
+        REQUIRE_THROWS_AS(*component2 >= *component1, std::runtime_error);
     }
 }
