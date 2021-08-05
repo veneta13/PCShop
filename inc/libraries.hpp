@@ -5,5 +5,6 @@
 #include <fstream>
 #include <memory>
 #include <vector>
+#include <string>
 
 #endif // !LIBRARIES
