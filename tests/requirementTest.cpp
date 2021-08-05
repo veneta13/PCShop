@@ -3,6 +3,7 @@
 #include "../inc/component.hpp"
 #include "../inc/componentKeeper.hpp"
 #include "../inc/availableComponents.hpp"
+#define private public //to access private methods
 #include "../inc/requirement.hpp"
 
 TEST_CASE("Requirement")
@@ -87,5 +88,19 @@ TEST_CASE("Requirement")
 
         REQUIRE(dummyRequirement.count() == 2);
         REQUIRE(dummyRequirement.getComponent(*myCpu2) == nullptr);
+    }
+
+    SECTION("GET BY ID")
+    {
+        Requirement dummyRequirement;
+        REQUIRE(dummyRequirement.count() == 0);
+
+        dummyRequirement.insertComponent(component1);
+        dummyRequirement.insertComponent(component2);
+
+        REQUIRE(dummyRequirement.getComponentById(-1) == nullptr);
+        REQUIRE(dummyRequirement.getComponentById(0) == component1);
+        REQUIRE(dummyRequirement.getComponentById(1) == component2);
+        REQUIRE(dummyRequirement.getComponentById(2) == nullptr);
     }
 }

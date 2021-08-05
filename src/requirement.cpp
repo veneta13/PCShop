@@ -32,3 +32,11 @@ std::shared_ptr<Component> Requirement::getComponent(Component component){
     if (index == -1) return nullptr;
     return components.component(index);
 }
+
+std::shared_ptr<Component> Requirement::getComponentById(int index)
+{
+    if (index >= 0 && index < components.count()) {
+        return components.component(index);
+    }
+    else return nullptr;
+}
