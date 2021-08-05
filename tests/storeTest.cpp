@@ -1,8 +1,5 @@
 #include "math.h"
 #include "catch2.h"
-#include "../inc/property.hpp"
-#include "../inc/component.hpp"
-#include "../inc/componentKeeper.hpp"
 #define private public //to access private methods
 #include "../inc/store.hpp"
 
