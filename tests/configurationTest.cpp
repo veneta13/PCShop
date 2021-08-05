@@ -6,6 +6,7 @@
 #include "../inc/component.hpp"
 #include "../inc/componentKeeper.hpp"
 #include "../inc/availableComponents.hpp"
+#define private public //to access private methods
 #include "../inc/configuration.hpp"
 
 #include <cmath>

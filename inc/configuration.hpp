@@ -10,13 +10,15 @@ class Configuration {
     double innerPrice = 0;
     bool validConfiguration(std::shared_ptr<Component> component);
 
-    public:
+    private: //for unit testing
     Configuration();
     int count() const;
     void insertComponent(std::shared_ptr<Component> component);
     void removeComponent(std::shared_ptr<Component> component);
     std::shared_ptr<Component> getComponent(Component component);
     double price();
+
+    friend class Configurator;
 };
 
 #endif
