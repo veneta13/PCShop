@@ -20,6 +20,7 @@ class Requirement {
     Requirement();
 
     friend class RequirementBuilder;
+    friend class Configurator;
 };
 
 #endif

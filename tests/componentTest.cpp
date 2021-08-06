@@ -373,7 +373,13 @@ TEST_CASE("OPERATOR >=")
         component2->addProperty(property3);
         component2->addProperty(property4); 
 
-       REQUIRE_THROWS_AS(*component1 >= *component2, std::runtime_error);
+        if (*component1 >= *component2) {result = true;}
+        else { result = false;}
+        REQUIRE(result == false);
+
+        if (*component2 >= *component1) {result = true;}
+        else { result = false;}
+        REQUIRE(result == false);
     }
 
     SECTION ("Different property count")
@@ -387,7 +393,12 @@ TEST_CASE("OPERATOR >=")
         component2->addProperty(property2); 
         component2->addProperty(property1); 
 
-        REQUIRE_THROWS_AS(*component1 >= *component2, std::runtime_error);
-        REQUIRE_THROWS_AS(*component2 >= *component1, std::runtime_error);
+        if (*component1 >= *component2) {result = true;}
+        else { result = false;}
+        REQUIRE(result == false);
+
+        if (*component2 >= *component1) {result = true;}
+        else { result = false;}
+        REQUIRE(result == false);
     }
 }
