@@ -24,6 +24,7 @@ class Store {
     static Store& getInstance();
 
     friend class Configurator;
+    friend class StoreBuilder;
 };
 
 #endif
