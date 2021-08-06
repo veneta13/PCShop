@@ -15,7 +15,6 @@ class Configurator {
     public:
     Configurator(Store* store);
     std::shared_ptr<Configuration> createConfiguration(Requirement requirement);
-    
 };
 
 #endif
