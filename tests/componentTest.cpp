@@ -402,3 +402,29 @@ TEST_CASE("OPERATOR >=")
         REQUIRE(result == false);
     }
 }
+
+TEST_CASE("Stringify")
+{
+    SECTION("1 property")
+    {
+        Property property(name[0], quantity[0], price[0]);
+
+        std::shared_ptr<Component> component(new Component());
+
+        component->addProperty(property);
+
+        REQUIRE(component->stringify() == "BASE MyComponentName1 1 10.10 ");
+    }
+
+    SECTION("2 properties")
+    {
+        Property property1(name[0], quantity[0], price[0]);
+        Property property2(name[2], quantity[1], price[3]);
+        std::shared_ptr<Component> component(new Component());
+
+        component->addProperty(property1);
+        component->addProperty(property2);
+
+        REQUIRE(component->stringify() == "BASE MyComponentName1 1 10.10 MyComponentName3 2 40.40 ");
+    }
+}

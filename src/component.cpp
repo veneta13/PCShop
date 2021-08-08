@@ -40,7 +40,7 @@
     }
 
     std::string Component::tellType() const{
-        return "Base component";
+        return "BASE";
     }
 
     void Component::calculatePrice(){
@@ -100,4 +100,32 @@
 
     double Component::getPrice() const{
         return price;
+    }
+
+    std::string Component::stringify()
+    {
+        std::string entry = "";
+        entry.append(tellType());
+        entry.append(" ");
+        for (int i = 0; i < properties.size(); i++)
+        {
+            entry.append(properties.at(i).getName());
+            entry.append(" ");
+            entry.append(std::to_string(properties.at(i).getQuantity()));
+            entry.append(" ");
+
+            //to ensure precision of 2 digits after the decimal point
+            //save the whole number part and the fractional part separately
+            double temp = properties.at(i).getPrice() * 100;
+            int wholeNum = (int)temp / 100;
+            int fractionNum = (int)temp % 100;
+
+            entry.append(std::to_string(wholeNum));
+            entry.append(".");
+            if (fractionNum < 10) {entry.append("0");}
+            entry.append(std::to_string(fractionNum));
+            entry.append(" ");
+        }
+
+        return entry;
     }

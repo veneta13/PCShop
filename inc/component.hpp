@@ -17,6 +17,7 @@ class Component {
     friend bool operator>=(const Component c1, const Component c2);
 
     virtual std::string tellType() const;
+    std::string stringify();
     void addProperty(Property property);
     void removeProperty(Property property);
     int getPropertyQuantity(std::string propertyName) const;
