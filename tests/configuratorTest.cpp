@@ -1,6 +1,6 @@
 #include "math.h"
 #include "catch2.h"
-#define private public //to access private methods 
+#define private public //to access private methods // does not work with lasest version of the code
 #include "../inc/configurator.hpp"
 
 TEST_CASE("Create Configuration")

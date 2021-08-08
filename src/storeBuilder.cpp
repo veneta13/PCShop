@@ -50,7 +50,6 @@ std::shared_ptr<Component> StoreBuilder::getComponent(std::string string)
         stream >> quantity;
         double price;
         stream >> price;
-
         Property property(name, quantity, price);
         component->addProperty(property);
     }
@@ -77,7 +76,6 @@ std::string StoreBuilder::stringTransformer(std::string string)
         }
     }
     else {throw std::runtime_error("Error: number of quotation marks invalid.");}
-
     return string;
 }
 

@@ -106,9 +106,9 @@
     {
         std::string entry = "";
         entry.append(tellType());
-        entry.append(" ");
         for (int i = 0; i < properties.size(); i++)
         {
+            entry.append(" ");
             //the the name is more than 1 word
             //add quotation marks
             if (properties.at(i).getName().find_first_of(" ") != std::string::npos)
@@ -133,7 +133,6 @@
             entry.append(".");
             if (fractionNum < 10) {entry.append("0");}
             entry.append(std::to_string(fractionNum));
-            entry.append(" ");
         }
 
         return entry;

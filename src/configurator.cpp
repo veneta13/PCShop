@@ -30,11 +30,11 @@ std::shared_ptr<Configuration> Configurator::createConfiguration(Requirement req
             if (typeid(*requirement.getComponentById(idRequired)) == typeid(*store->getComponentById(idStore))
             && (*store->getComponentById(idStore) >= *requirement.getComponentById(idRequired)))
             {
-                //if there is already a component that fits the requirements, check which one is better
+                //if there is already a component that fits the requirements, check which one less expensive
                 if (bestComponentIndex == -1) {
                     bestComponentIndex = idStore;
                 }
-                else if (*store->getComponentById(idStore) >= *store->getComponentById(bestComponentIndex)) {
+                else if ((*store->getComponentById(idStore)).getPrice() < (*store->getComponentById(bestComponentIndex)).getPrice()) {
                     bestComponentIndex = idStore;
                 }
             }

@@ -21,10 +21,13 @@ void FileSaver::saveStore(std::string filename)
 
 void FileSaver::saveConfigurationInFile(std::shared_ptr<Configuration> configuration)
 {
-    std::ofstream file;
     std::string fileName = timeNowFileName();
+    std::ofstream file(fileName);
     std::string line = "";
-    file.open (fileName, std::ios_base::out | std::ios_base::trunc);
+    file.open (fileName, std::ios_base::out);
+
+    if (!file.good()) {throw std::runtime_error("Error: Failed to open file.");}
+    
     for (int i = 0; i < configuration->count(); i++)
     {
         file << configuration->getComponentById(i)->stringify();
