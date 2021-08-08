@@ -3,7 +3,6 @@
 
 #include "libraries.hpp"
 #include "componentKeeper.hpp"
-
 class Store {
     //Singleton
     Store();
@@ -25,6 +24,7 @@ class Store {
 
     friend class Configurator;
     friend class StoreBuilder;
+    friend class FileSaver;
 };
 
 #endif

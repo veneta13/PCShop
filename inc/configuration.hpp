@@ -20,6 +20,7 @@ class Configuration {
     double price();
 
     friend class Configurator;
+    friend class FileSaver;
 };
 
 #endif
