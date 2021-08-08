@@ -26,44 +26,74 @@ void StoreBuilder::read(std::string fileName)
 void StoreBuilder::rawToObjects()
 {
     for (int i = 0; i < rawFileData.size(); i++) {
-        std::string type;
-        std::string propertyName;
-        int propertyQuantity;
-        double propertyPrice;
-
-        //convert the file line information into stream
-        std::stringstream stream(rawFileData[i]);
-
-        //get object type of available types
-        stream >> type;
-        std::shared_ptr<Component> component = createComponent(type);
-
-        //read line and save to object Property
-        //each property save in component
-        while (stream >> propertyName) {
-            //check if the line doesn't end after the name
-            if (stream.str().empty()) {
-                throw std::runtime_error("Error: Invalid property at file line " + std::to_string(i));
-            }
-
-            stream >> propertyQuantity;
-            //check if the line doesn't end after the quantity
-            //and validate quantity at least 1
-            if (stream.str().empty() || propertyQuantity < 1) {
-                throw std::runtime_error("Error: Invalid property at file line " + std::to_string(i));
-            }
-
-            stream >> propertyPrice;
-            //validate positive price
-            if (stream.str().empty() || propertyPrice > 0) {
-                throw std::runtime_error("Error: Invalid property at file line " + std::to_string(i));
-            }
-
-            Property property(propertyName, propertyQuantity, propertyPrice);
-            component->addProperty(property);
-        }
-        store->insertComponent(component);
+        store->insertComponent(getComponent(rawFileData[i]));
     }
+}
+
+std::shared_ptr<Component> StoreBuilder::getComponent(std::string string) 
+{
+    string = stringTransformer(string);
+    std::stringstream stream(string);
+    //get object type of available type
+    std::string type;
+    stream >> type;
+    std::shared_ptr<Component> component = createComponent(type);
+
+    //creates properties for component
+    while (stream.good())
+    {
+        std::string name;
+        stream >> name;
+        name = stringTransformerBack(name);
+
+        int quantity;
+        stream >> quantity;
+        double price;
+        stream >> price;
+
+        Property property(name, quantity, price);
+        component->addProperty(property);
+    }
+    return component;
+}
+
+std::string StoreBuilder::stringTransformer(std::string string)
+{
+    //this function transforms empty spaces in string to
+    //~ to help read them as one string
+
+    std::vector<int> quotePositions;
+
+    for (int i = 0; i < string.length(); i++)
+    {
+        if (string[i] == '"') {quotePositions.push_back(i);}
+    }
+
+    if (quotePositions.size() % 2 == 0) {
+        for (int i = 0; i < quotePositions.size(); i+=2) {
+            for (int j = quotePositions[i]; j < quotePositions[i+1]; j++) {
+                if (string[j] == ' ') {string[j] = '~';}
+            }
+        }
+    }
+    else {throw std::runtime_error("Error: number of quotation marks invalid.");}
+
+    return string;
+}
+
+std::string StoreBuilder::stringTransformerBack(std::string string)
+{
+    //this function reverses the effect of stringTransformer
+
+    if (string.at(0) == '"')
+    {
+        string = string.substr(1, string.length()-2);
+        for (int i = 0; i < string.length(); i++)
+        {
+            if (string[i] == '~') {string[i] = ' ';}
+        }
+    }
+    return string;
 }
 
 std::shared_ptr<Component> StoreBuilder::createComponent(std::string type)

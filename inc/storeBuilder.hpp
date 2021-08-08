@@ -13,6 +13,9 @@ class StoreBuilder
     void read(std::string filename);
     void rawToObjects();
     std::shared_ptr<Component> createComponent(std::string type);
+    std::shared_ptr<Component> getComponent(std::string); 
+    std::string stringTransformer(std::string string);
+    std::string stringTransformerBack(std::string string);
 
     public:
     StoreBuilder(Store* store, std::string filename);

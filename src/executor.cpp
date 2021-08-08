@@ -4,7 +4,7 @@ Executor::Executor(std::string file)
 {
     Store& store = Store::getInstance();
     StoreBuilder(&store, file);
-
+    fileSaver = std::make_shared<FileSaver>(&store, file);
     printCommands();
 }
 
@@ -25,26 +25,22 @@ void Executor::commandInterpreter(int command)
 void Executor::request()
 {
     Store& store = Store::getInstance();
+
     RequirementBuilder requirementBuilder;
+    Requirement requirement = *requirementBuilder.createRequirement();
+
     Configurator configurator(&store);
+    std::shared_ptr<Configuration> configuration = configurator.createConfiguration(requirement);
 
-    configurator.createConfiguration(*requirementBuilder.createRequirement());
-    //print 
-
+    log(2);
+    fileSaver->saveConfigurationInFile(configuration);
     printCommands();
 }
 
 void Executor::exit()
 {
     log(0);
-    //save store
-}
-
-void Executor::saveInFile(std::string file)
-{
-    //file writer object
-    //to save store
-    //and configurations
+    fileSaver->saveStore(storeFile);
 }
 
 void Executor::log(int status)

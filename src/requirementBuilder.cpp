@@ -1,6 +1,9 @@
 #include "../inc/requirementBuilder.hpp"
 
-RequirementBuilder::RequirementBuilder(){};
+RequirementBuilder::RequirementBuilder()
+{
+    requirement = std::make_shared<Requirement>();
+};
 
 std::string RequirementBuilder::promptComponentType()
 {
@@ -9,7 +12,7 @@ std::string RequirementBuilder::promptComponentType()
               << "CPU\n" 
               << "RAM\n"
               << "HDD\n";
-
+    std::cin.clear();
     std::cin >> type;
     return type;
 }
@@ -31,12 +34,14 @@ RequirementBuilder::PropertyStruct RequirementBuilder::promptPropertyFields()
 
     std::string propertyName;
     std::cout << "Enter the name of the property:\n";
+    std::cin.ignore();
     std::getline (std::cin,propertyName);
     property.name = propertyName;
 
     int propertyQuantity;
     do {
         std::cout << "Enter the quantity of the property:\n";
+        std::cin.clear();
         std::cin >> propertyQuantity;
     } while (propertyQuantity < 1);
     property.quantity = propertyQuantity;
@@ -44,6 +49,7 @@ RequirementBuilder::PropertyStruct RequirementBuilder::promptPropertyFields()
     double propertyPrice;
     do {
         std::cout << "Enter the price of the property:\n";
+        std::cin.clear();
         std::cin >> propertyPrice;
     } while (propertyPrice < 0);
     property.price = propertyPrice;
@@ -77,9 +83,7 @@ void RequirementBuilder::createComponent()
 
         std::cout << "Would you like to add another property? y/n\n";
         std::cin >> choice; 
-
     } while (choice == 'y');
-
     //save component to requirement list
     requirement->insertComponent(component);
 }

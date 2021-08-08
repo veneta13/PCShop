@@ -6,12 +6,17 @@
 #include "storeBuilder.hpp"
 #include "requirementBuilder.hpp"
 #include "configurator.hpp"
+#include "fileSaver.hpp"
+
+class FileSaver;
 
 class Executor
 {
+    std::string storeFile;
+    std::shared_ptr<FileSaver> fileSaver;
+    
     void printCommands();
     void request();
-    void saveInFile(std::string file);
     void exit();
     void log(int status);
 
