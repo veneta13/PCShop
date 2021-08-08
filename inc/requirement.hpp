@@ -6,7 +6,7 @@
 
 class Requirement {
 
-    ComponentKeeper components;
+    std::shared_ptr<ComponentKeeper> components;
     bool validRequirement(std::shared_ptr<Component> component);
 
     private: //for unit testing

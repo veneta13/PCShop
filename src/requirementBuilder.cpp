@@ -2,7 +2,7 @@
 
 RequirementBuilder::RequirementBuilder()
 {
-    requirement = std::make_shared<Requirement>();
+    requirement = std::shared_ptr<Requirement>(new Requirement);
 };
 
 std::string RequirementBuilder::promptComponentType()

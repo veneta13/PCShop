@@ -7,8 +7,6 @@
 
 class ComponentKeeper
 {
-    ComponentKeeper();
-
     std::vector<std::shared_ptr<Component>> components = {};
 
     int count() const;
@@ -20,6 +18,9 @@ class ComponentKeeper
     friend class Store;
     friend class Configuration;
     friend class Requirement;
+
+    public:
+    ComponentKeeper();
 };
 
 #endif

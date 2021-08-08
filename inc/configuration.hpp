@@ -6,7 +6,7 @@
 
 class Configuration {
 
-    ComponentKeeper components;
+    std::shared_ptr<ComponentKeeper> components;
     double innerPrice = 0;
     bool validConfiguration(std::shared_ptr<Component> component);
 

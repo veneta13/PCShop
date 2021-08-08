@@ -109,7 +109,16 @@
         entry.append(" ");
         for (int i = 0; i < properties.size(); i++)
         {
-            entry.append(properties.at(i).getName());
+            //the the name is more than 1 word
+            //add quotation marks
+            if (properties.at(i).getName().find_first_of(" ") != std::string::npos)
+            {
+                entry.append("\"");
+                entry.append(properties.at(i).getName());
+                entry.append("\"");
+            }
+            else {entry.append(properties.at(i).getName());}
+
             entry.append(" ");
             entry.append(std::to_string(properties.at(i).getQuantity()));
             entry.append(" ");

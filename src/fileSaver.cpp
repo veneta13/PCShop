@@ -8,10 +8,9 @@ FileSaver::FileSaver(Store* store, std::string storeFile){
 void FileSaver::saveStore(std::string filename)
 {
     std::ofstream file;
-    std::string fileName = timeNowFileName();
     std::string line = "";
 
-    file.open (fileName, std::ios_base::out | std::ios_base::trunc);
+    file.open (storeFile, std::ios_base::out | std::ios_base::trunc);
     for (int i = 0; i < store->count(); i++)
     {
         file << store->getComponentById(i)->stringify();
@@ -23,9 +22,9 @@ void FileSaver::saveStore(std::string filename)
 void FileSaver::saveConfigurationInFile(std::shared_ptr<Configuration> configuration)
 {
     std::ofstream file;
+    std::string fileName = timeNowFileName();
     std::string line = "";
-
-    file.open (storeFile, std::ios_base::out | std::ios_base::trunc);
+    file.open (fileName, std::ios_base::out | std::ios_base::trunc);
     for (int i = 0; i < configuration->count(); i++)
     {
         file << configuration->getComponentById(i)->stringify();
@@ -42,6 +41,8 @@ std::string FileSaver::timeNowFileName()
     time_t currentTime = time(0);
     char* dateTimeChar = ctime(&currentTime);
     std::string filename(dateTimeChar); 
+    filename = filename.substr(0, filename.length()-1);
     filename.append(".txt");
+    
     return filename;
 }

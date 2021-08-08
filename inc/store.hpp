@@ -7,7 +7,7 @@ class Store {
     //Singleton
     Store();
     Store(Store const&);
-    ComponentKeeper components;
+    std::shared_ptr<ComponentKeeper> components;
 
     private: //for unit testing
     Store(Store &other) = delete;

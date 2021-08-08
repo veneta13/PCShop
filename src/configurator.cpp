@@ -42,9 +42,13 @@ std::shared_ptr<Configuration> Configurator::createConfiguration(Requirement req
 
         // if there is not component that fits the requirement 
         // such configuration does not exist
-        if (bestComponentIndex == -1) {configuration = nullptr; break;}
+        if (bestComponentIndex == -1) {
+            configuration = nullptr; 
+            std::cout << "Warning: No component fits the requirement.\n";
+            break;}
         else {configuration->insertComponent(store->getComponentById(bestComponentIndex));}
     }
+    
     removeSoldComponents();
     return configuration;
 }
