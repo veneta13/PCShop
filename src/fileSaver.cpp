@@ -23,10 +23,8 @@ void FileSaver::saveConfigurationInFile(std::shared_ptr<Configuration> configura
 {
     std::string fileName = timeNowFileName();
     std::ofstream file(fileName);
-    std::string line = "";
-    file.open (fileName, std::ios_base::out);
 
-    if (!file.good()) {throw std::runtime_error("Error: Failed to open file.");}
+    if (!file.is_open()) {throw std::runtime_error("Error: Failed to open file.");}
     
     for (int i = 0; i < configuration->count(); i++)
     {
@@ -43,9 +41,12 @@ std::string FileSaver::timeNowFileName()
 {
     time_t currentTime = time(0);
     char* dateTimeChar = ctime(&currentTime);
-    std::string filename(dateTimeChar); 
+    std::string filename(dateTimeChar);
     filename = filename.substr(0, filename.length()-1);
     filename.append(".txt");
-    
+    for (int i = 0; i < filename.length(); i++)
+    {
+        if (filename[i] == ' ' || filename[i] == ':') {filename[i] = '_';}
+    }
     return filename;
 }

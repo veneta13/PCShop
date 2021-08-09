@@ -46,10 +46,10 @@ void Executor::exit()
 
 void Executor::log(int status)
 {
-    if (status == 0) {std::cout << "Exiting the program..." << std::endl;}
+    if (status == 0) {std::cout << "Exiting the program...\n" << std::endl;}
     if (status == 1) {std::cout << "Enter the index of the command you want to execute.\n"
                                 << "The program has the following commands available:\n"
                                 << "#1 Build a requirement;\n"
-                                << "#Other - exit.";}
-    if (status == 2) {std::cout << "Configuration created successfully. Saving in file..." << std::endl;}
+                                << "#Other - exit.\n";}
+    if (status == 2) {std::cout << "Configuration created successfully. Saving in file...\n";}
 }

@@ -19,7 +19,6 @@ bool Configuration::validConfiguration(std::shared_ptr<Component> component)
 }
 
 int Configuration::count() const{
-    std::cout << "COMPK add:" << components << std::endl;
     return components->count();
 }
 

@@ -41,17 +41,19 @@ RequirementBuilder::PropertyStruct RequirementBuilder::promptPropertyFields()
     int propertyQuantity;
     do {
         std::cout << "Enter the quantity of the property:\n";
-        std::cin.clear();
         std::cin >> propertyQuantity;
+        std::cin.clear();
+        std::cin.ignore(100000, '\n');
     } while (propertyQuantity < 1);
     property.quantity = propertyQuantity;
 
     double propertyPrice;
     do {
         std::cout << "Enter the price of the property:\n";
-        std::cin.clear();
         std::cin >> propertyPrice;
-    } while (propertyPrice < 0);
+        std::cin.clear();
+        std::cin.ignore(100000, '\n');
+    } while (propertyPrice < 0.01);
     property.price = propertyPrice;
 
     return property;

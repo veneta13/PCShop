@@ -35,7 +35,7 @@ std::shared_ptr<Configuration> Configurator::createConfiguration(Requirement req
                     bestComponentIndex = idStore;
                 }
                 else if ((*store->getComponentById(idStore)).getPrice() < (*store->getComponentById(bestComponentIndex)).getPrice()) {
-                    bestComponentIndex = idStore;
+                   bestComponentIndex = idStore;
                 }
             }
         }
