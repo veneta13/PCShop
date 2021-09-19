@@ -1,0 +1,10 @@
+CPU "cores count" 4 30.20 frequency 5300 0.05
+HDD "reading speed" 148 0.60 TB 2 95.00 "writing speed" 145 0.56
+RAM "rgb colors" 100 0.13 GB 8 4.70 "chip count" 26 2.20
+CPU "cores count" 3 25.50 frequency 4700 0.03
+CPU frequency 6000 0.07 "cores count" 8 5.00
+RAM GB 16 5.00 "chip count" 30 2.29 "rgb colors" 10 2.25
+HDD TB 1 90.00 "reading speed" 150 0.50 "writing speed" 130 0.48
+HDD "reading speed" 130 0.40 TB 1 95.00 "writing speed" 135 0.40
+RAM "rgb colors" 200 0.20 GB 16 8.00 "chip count" 20 1.80
+CPU "cores count" 8 15.00 frequency 4000 0.03
